@@ -1,28 +1,54 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ticket_categories")
 public class TicketCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(unique = true)
+    private String categoryName;
 
-    // ===== Getters & Setters =====
+    private String description;
+
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+
+    // ===== GETTERS & SETTERS (REQUIRED) =====
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }
