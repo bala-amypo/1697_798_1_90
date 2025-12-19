@@ -1,18 +1,13 @@
 package com.example.demo.util;
 
+import java.util.*;
+
 public class TextSimilarityUtil {
 
     public static double similarity(String s1, String s2) {
-        if (s1 == null || s2 == null) return 0.0;
-        s1 = s1.toLowerCase();
-        s2 = s2.toLowerCase();
-
-        int common = 0;
-        for (String word : s1.split(" ")) {
-            if (s2.contains(word)) {
-                common++;
-            }
-        }
-        return (double) common / Math.max(s1.split(" ").length, 1);
+        Set<String> set1 = new HashSet<>(Arrays.asList(s1.toLowerCase().split("\\s+")));
+        Set<String> set2 = new HashSet<>(Arrays.asList(s2.toLowerCase().split("\\s+")));
+        set1.retainAll(set2);
+        return (double) set1.size() / Math.max(1, Math.max(s1.length(), s2.length()));
     }
 }
