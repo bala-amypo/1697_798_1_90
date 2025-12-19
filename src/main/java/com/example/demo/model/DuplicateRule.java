@@ -1,25 +1,38 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "duplicate_rules")
 public class DuplicateRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String ruleName;
 
-    private String matchType; // KEYWORD, SIMILARITY, EXACT_MATCH
     private Double threshold;
 
-    private LocalDateTime createdAt;
+    // ===== Getters & Setters =====
 
-    @PrePersist
-    void created() {
-        createdAt = LocalDateTime.now();
+    public Long getId() {
+        return id;
+    }
+
+    public String getRuleName() {
+        return ruleName;
+    }
+
+    public void setRuleName(String ruleName) {
+        this.ruleName = ruleName;
+    }
+
+    public Double getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Double threshold) {
+        this.threshold = threshold;
     }
 }
