@@ -17,35 +17,31 @@ public class TicketController {
         this.service = service;
     }
 
-    // CREATE
-    @PostMapping
-    public Ticket create(@RequestBody Ticket ticket) {
-        return service.createTicket(ticket);
-    }
+    // CREATE (matches service signature)
+    @PostMapping("/{userId}/{categoryId}")
+    public Ticket create(
+            @PathVariable Long userId,
+            @PathVariable Long categoryId,
+            @RequestBody Ticket ticket) {
 
-    // READ ALL
-    @GetMapping
-    public List<Ticket> getAll() {
-        return service.getAllTickets();
+        return service.createTicket(userId, categoryId, ticket);
     }
 
     // READ BY ID
     @GetMapping("/{id}")
     public Ticket getById(@PathVariable Long id) {
-        return service.getTicketById(id);
+        return service.getTicket(id);
     }
 
-    // UPDATE
-    @PutMapping("/{id}")
-    public Ticket update(
-            @PathVariable Long id,
-            @RequestBody Ticket ticket) {
-        return service.updateTicket(id, ticket);
+    // READ BY USER
+    @GetMapping("/user/{userId}")
+    public List<Ticket> getByUser(@PathVariable Long userId) {
+        return service.getTicketsByUser(userId);
     }
 
-    // DELETE
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.deleteTicket(id);
+    // READ ALL
+    @GetMapping("/all")
+    public List<Ticket> getAll() {
+        return service.getAllTickets();
     }
 }

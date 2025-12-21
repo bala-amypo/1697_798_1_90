@@ -8,7 +8,7 @@ import com.example.demo.model.TicketCategory;
 import com.example.demo.service.TicketCategoryService;
 
 @RestController
-@RequestMapping("/api/ticket-categories")
+@RequestMapping("/api/categories")
 public class TicketCategoryController {
 
     private final TicketCategoryService service;
@@ -32,20 +32,6 @@ public class TicketCategoryController {
     // READ BY ID
     @GetMapping("/{id}")
     public TicketCategory getById(@PathVariable Long id) {
-        return service.getCategoryById(id);
-    }
-
-    // UPDATE
-    @PutMapping("/{id}")
-    public TicketCategory update(
-            @PathVariable Long id,
-            @RequestBody TicketCategory category) {
-        return service.updateCategory(id, category);
-    }
-
-    // DELETE
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.deleteCategory(id);
+        return service.getCategory(id);
     }
 }
