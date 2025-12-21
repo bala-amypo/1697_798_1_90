@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Ticket;
@@ -11,37 +12,41 @@ import com.example.demo.service.TicketService;
 @RequestMapping("/api/tickets")
 public class TicketController {
 
-    private final TicketService service;
+    @Autowired
+    private TicketService service;
 
-    public TicketController(TicketService service) {
-        this.service = service;
-    }
-
-    // CREATE (matches service signature)
+    // CREATE
     @PostMapping("/{userId}/{categoryId}")
-    public Ticket create(
+    public Ticket createTicket(
             @PathVariable Long userId,
             @PathVariable Long categoryId,
             @RequestBody Ticket ticket) {
-
         return service.createTicket(userId, categoryId, ticket);
+    }
+
+    // READ ALL
+    @GetMapping
+    public List<Ticket> getAllTickets() {
+        return service.getAllTickets();
     }
 
     // READ BY ID
     @GetMapping("/{id}")
-    public Ticket getById(@PathVariable Long id) {
-        return service.getTicket(id);
+    public Ticket getTicketById(@PathVariable Long id) {
+        return service.getTicketById(id);
     }
 
-    // READ BY USER
-    @GetMapping("/user/{userId}")
-    public List<Ticket> getByUser(@PathVariable Long userId) {
-        return service.getTicketsByUser(userId);
+    // UPDATE
+    @PutMapping("/{id}")
+    public Ticket updateTicket(
+            @PathVariable Long id,
+            @RequestBody Ticket ticket) {
+        return service.updateTicket(id, ticket);
     }
 
-    // READ ALL
-    @GetMapping("/all")
-    public List<Ticket> getAll() {
-        return service.getAllTickets();
+    // DELETE
+    @DeleteMapping("/{id}")
+    public void deleteTicket(@PathVariable Long id) {
+        service.deleteTicket(id);
     }
 }
