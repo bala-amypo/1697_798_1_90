@@ -17,19 +17,19 @@ public class TicketCategoryController {
         this.service = service;
     }
 
-    // CREATE
+   
     @PostMapping
     public TicketCategory create(@RequestBody TicketCategory category) {
         return service.createCategory(category);
     }
 
-    // READ ALL
+    
     @GetMapping
     public List<TicketCategory> getAll() {
         return service.getAllCategories();
     }
 
-    // READ BY ID
+   
     @GetMapping("/{id}")
     public TicketCategory getById(@PathVariable Long id) {
         return service.getCategory(id);

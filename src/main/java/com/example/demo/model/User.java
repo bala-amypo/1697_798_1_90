@@ -21,7 +21,7 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    // ===== Getters & Setters =====
+    
 
     public Long getId() {
         return id;

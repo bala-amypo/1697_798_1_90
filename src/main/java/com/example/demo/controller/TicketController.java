@@ -15,7 +15,6 @@ public class TicketController {
     @Autowired
     private TicketService service;
 
-    // CREATE
     @PostMapping("/{userId}/{categoryId}")
     public Ticket createTicket(
             @PathVariable Long userId,
@@ -24,19 +23,19 @@ public class TicketController {
         return service.createTicket(userId, categoryId, ticket);
     }
 
-    // READ ALL
+   
     @GetMapping
     public List<Ticket> getAllTickets() {
         return service.getAllTickets();
     }
 
-    // READ BY ID
+    
     @GetMapping("/{id}")
     public Ticket getTicketById(@PathVariable Long id) {
         return service.getTicketById(id);
     }
 
-    // UPDATE
+    
     @PutMapping("/{id}")
     public Ticket updateTicket(
             @PathVariable Long id,
@@ -44,7 +43,7 @@ public class TicketController {
         return service.updateTicket(id, ticket);
     }
 
-    // DELETE
+   
     @DeleteMapping("/{id}")
     public void deleteTicket(@PathVariable Long id) {
         service.deleteTicket(id);

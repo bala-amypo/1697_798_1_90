@@ -14,7 +14,7 @@ public class DuplicateRule {
 
     private Double threshold;
 
-    // ===== Getters & Setters =====
+   
 
     public Long getId() {
         return id;

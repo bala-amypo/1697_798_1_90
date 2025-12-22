@@ -17,19 +17,19 @@ public class DuplicateDetectionController {
         this.service = service;
     }
 
-    // RUN DUPLICATE DETECTION
+   
     @GetMapping("/run/{ticketId}")
     public List<DuplicateDetectionLog> runDetection(@PathVariable Long ticketId) {
         return service.detectDuplicates(ticketId);
     }
 
-    // GET LOGS FOR A TICKET
+    
     @GetMapping("/ticket/{ticketId}")
     public List<DuplicateDetectionLog> getLogsForTicket(@PathVariable Long ticketId) {
         return service.getLogsForTicket(ticketId);
     }
 
-    // GET LOG BY ID
+   
     @GetMapping("/{id}")
     public DuplicateDetectionLog getLog(@PathVariable Long id) {
         return service.getLog(id);

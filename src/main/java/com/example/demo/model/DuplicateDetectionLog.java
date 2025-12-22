@@ -23,7 +23,7 @@ public class DuplicateDetectionLog {
 
     private LocalDateTime detectedAt;
 
-    // ===== Getters & Setters =====
+    
 
     public Long getId() {
         return id;

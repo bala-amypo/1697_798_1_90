@@ -28,7 +28,7 @@ public class Ticket {
 
     private LocalDateTime createdAt;
 
-    // ===== Getters & Setters =====
+   
 
     public Long getId() {
         return id;

@@ -22,7 +22,7 @@ public class TicketCategory {
         createdAt = LocalDateTime.now();
     }
 
-    // ===== GETTERS & SETTERS (REQUIRED) =====
+   
 
     public Long getId() {
         return id;
