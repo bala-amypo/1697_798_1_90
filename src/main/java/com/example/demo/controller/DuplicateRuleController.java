@@ -3,8 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.DuplicateRule;
 import com.example.demo.service.DuplicateRuleService;
 
-@RestController
-@RequestMapping("/api/rules")
+
 public class DuplicateRuleController {
     private final DuplicateRuleService ruleService;
 

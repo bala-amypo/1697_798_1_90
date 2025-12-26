@@ -3,8 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.TicketCategory;
 import com.example.demo.service.TicketCategoryService;
 
-@RestController
-@RequestMapping("/api/categories")
 public class TicketCategoryController {
     private final TicketCategoryService categoryService;
 
