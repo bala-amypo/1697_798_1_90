@@ -4,6 +4,8 @@ import com.example.demo.model.Ticket;
 import com.example.demo.service.TicketService;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/tickets")
 public class TicketController {
     private final TicketService ticketService;
 
