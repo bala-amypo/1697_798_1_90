@@ -1,34 +1,20 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.model.DuplicateRule;
 import com.example.demo.service.DuplicateRuleService;
 
-@RestController
-@RequestMapping("/api/rules")
 public class DuplicateRuleController {
+    private final DuplicateRuleService ruleService;
 
-    private final DuplicateRuleService service;
-
-    public DuplicateRuleController(DuplicateRuleService service) {
-        this.service = service;
+    public DuplicateRuleController(DuplicateRuleService ruleService) {
+        this.ruleService = ruleService;
     }
 
-    @PostMapping
-    public DuplicateRule create(@RequestBody DuplicateRule rule) {
-        return service.createRule(rule);
+    public DuplicateRule createRule(DuplicateRule rule) {
+        return ruleService.createRule(rule);
     }
 
-    @GetMapping
-    public List<DuplicateRule> getAll() {
-        return service.getAllRules();
-    }
-
-    @GetMapping("/{id}")
-    public DuplicateRule getById(@PathVariable Long id) {
-        return service.getRule(id);
+    public DuplicateRule getRule(Long id) {
+        return ruleService.getRule(id);
     }
 }
