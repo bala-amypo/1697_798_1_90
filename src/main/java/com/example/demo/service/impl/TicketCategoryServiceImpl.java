@@ -27,11 +27,11 @@
 
 
 
-
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.TicketCategory;
 import com.example.demo.repository.TicketCategoryRepository;
+import com.example.demo.service.TicketCategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,7 +62,7 @@ public class TicketCategoryServiceImpl implements TicketCategoryService {
 
     @Override
     public List<TicketCategory> getAllCategories() {
-        return categoryRepository.findAll(); // VERY IMPORTANT
+        return categoryRepository.findAll();
     }
 
     @Override
