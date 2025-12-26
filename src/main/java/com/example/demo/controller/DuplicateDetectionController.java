@@ -4,6 +4,9 @@ import com.example.demo.model.DuplicateDetectionLog;
 import com.example.demo.service.DuplicateDetectionService;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/detection")
+
 public class DuplicateDetectionController {
     private final DuplicateDetectionService detectionService;
 
