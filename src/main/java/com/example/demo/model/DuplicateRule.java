@@ -1,9 +1,45 @@
-package com.example.demo.model;
+// package com.example.demo.model;
 
-import jakarta.persistence.*;
+// import jakarta.persistence.*;
+
+// @Entity
+// @Table(name = "duplicate_rules")
+// public class DuplicateRule {
+
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
+
+//     private String ruleName;
+
+//     private Double threshold;
+
+   
+
+//     public Long getId() {
+//         return id;
+//     }
+
+//     public String getRuleName() {
+//         return ruleName;
+//     }
+
+//     public void setRuleName(String ruleName) {
+//         this.ruleName = ruleName;
+//     }
+
+//     public Double getThreshold() {
+//         return threshold;
+//     }
+
+//     public void setThreshold(Double threshold) {
+//         this.threshold = threshold;
+//     }
+// }
+
+
 
 @Entity
-@Table(name = "duplicate_rules")
 public class DuplicateRule {
 
     @Id
@@ -11,28 +47,27 @@ public class DuplicateRule {
     private Long id;
 
     private String ruleName;
+    private String matchType;
+    private double threshold;
 
-    private Double threshold;
+    public DuplicateRule() {}
 
-   
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getRuleName() {
-        return ruleName;
-    }
-
-    public void setRuleName(String ruleName) {
+    // REQUIRED
+    public DuplicateRule(String ruleName, String matchType, double threshold) {
         this.ruleName = ruleName;
-    }
-
-    public Double getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(Double threshold) {
+        this.matchType = matchType;
         this.threshold = threshold;
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getRuleName() { return ruleName; }
+    public void setRuleName(String ruleName) { this.ruleName = ruleName; }
+
+    public String getMatchType() { return matchType; }
+    public void setMatchType(String matchType) { this.matchType = matchType; }
+
+    public double getThreshold() { return threshold; }
+    public void setThreshold(double threshold) { this.threshold = threshold; }
 }
