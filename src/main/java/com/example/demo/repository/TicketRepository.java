@@ -1,15 +1,29 @@
+// package com.example.demo.repository;
+
+// import com.example.demo.model.Ticket;
+// import java.util.List;
+// import java.util.Optional;
+
+// public interface TicketRepository {
+//     Ticket save(Ticket ticket);
+//     Optional<Ticket> findById(Long id);
+//     List<Ticket> findAll();
+//     List<Ticket> findByStatus(String status);
+//     List<Ticket> findByCategory_Id(Long categoryId);
+//     List<Ticket> findByUser_Id(Long userId);
+//     List<Ticket> findBySubjectContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String subject, String description);
+// }
+
+
+
 package com.example.demo.repository;
 
 import com.example.demo.model.Ticket;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TicketRepository {
-    Ticket save(Ticket ticket);
-    Optional<Ticket> findById(Long id);
-    List<Ticket> findAll();
-    List<Ticket> findByStatus(String status);
-    List<Ticket> findByCategory_Id(Long categoryId);
-    List<Ticket> findByUser_Id(Long userId);
-    List<Ticket> findBySubjectContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String subject, String description);
+import java.util.List;
+
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
+
+    List<Ticket> findByUserId(Long userId);
 }
