@@ -1,10 +1,10 @@
-// package com.example.demo.service;
+package com.example.demo.service;
 
-// import com.example.demo.model.TicketCategory;
+import com.example.demo.model.TicketCategory;
 
-// public interface TicketCategoryService {
-//     TicketCategory createCategory(TicketCategory category);
-//     TicketCategory getCategory(Long id);
-// }
+public interface TicketCategoryService {
+    TicketCategory createCategory(TicketCategory category);
+    TicketCategory getCategory(Long id);
+}
 
 
