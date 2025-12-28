@@ -31,37 +31,32 @@ public class SecurityConfig {
         this.jwtFilter = jwtFilter;
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+ @Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
+    http
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
 
-                // 🔓 PUBLIC (tests & swagger safe)
-                .requestMatchers(
-                        "/auth/**",
-                        "/swagger-ui/**",
-                        "/v3/api-docs/**",
-                        "/demo",
-                        "/health"
-                ).permitAll()
+            // 🔓 PUBLIC ENDPOINTS
+            .requestMatchers(
+                    "/auth/**",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**",
+                    "/health",
+                    "/demo"
+            ).permitAll()
 
-                // 🔐 PROTECTED APIs
-                .requestMatchers("/api/**").authenticated()
+            // 🔓 ALLOW USER REGISTRATION (VERY IMPORTANT)
+            .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
 
-                // allow anything else
-                .anyRequest().permitAll()
-            )
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            // 🔐 EVERYTHING ELSE NEEDS JWT
+            .requestMatchers("/api/**").authenticated()
 
-        return http.build();
-    }
+            .anyRequest().permitAll()
+        )
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
+    return http.build();
 }
 
