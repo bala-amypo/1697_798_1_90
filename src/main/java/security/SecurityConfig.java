@@ -16,6 +16,7 @@ package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,32 +32,40 @@ public class SecurityConfig {
         this.jwtFilter = jwtFilter;
     }
 
- @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    http
-        .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth
+        http
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
 
-            // 🔓 PUBLIC ENDPOINTS
-            .requestMatchers(
-                    "/auth/**",
-                    "/swagger-ui/**",
-                    "/v3/api-docs/**",
-                    "/health",
-                    "/demo"
-            ).permitAll()
+                // 🔓 PUBLIC ENDPOINTS
+                .requestMatchers(
+                        "/auth/**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/health",
+                        "/demo"
+                ).permitAll()
 
-            // 🔓 ALLOW USER REGISTRATION (VERY IMPORTANT)
-            .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                // 🔓 USER REGISTRATION (NO TOKEN)
+                .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
 
-            // 🔐 EVERYTHING ELSE NEEDS JWT
-            .requestMatchers("/api/**").authenticated()
+                // 🔐 ALL OTHER APIs REQUIRE JWT
+                .requestMatchers("/api/**").authenticated()
 
-            .anyRequest().permitAll()
-        )
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .anyRequest().permitAll()
+            )
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
-    return http.build();
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
 }
+
 
