@@ -11,7 +11,6 @@
 // }
 
 
-
 package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
@@ -19,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -38,7 +39,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
 
-                // 🔓 PUBLIC (tests & swagger safe)
+                // 🔓 PUBLIC endpoints (Swagger, auth, servlet, health)
                 .requestMatchers(
                         "/auth/**",
                         "/swagger-ui/**",
@@ -50,7 +51,7 @@ public class SecurityConfig {
                 // 🔐 PROTECTED APIs
                 .requestMatchers("/api/**").authenticated()
 
-                // allow anything else
+                // Allow everything else
                 .anyRequest().permitAll()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -63,5 +64,10 @@ public class SecurityConfig {
             AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
-}
 
+    // ✅ REQUIRED for login to work
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
