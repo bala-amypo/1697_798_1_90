@@ -1,12 +1,103 @@
+// package com.example.demo.service.impl;
+
+// import com.example.demo.model.TicketCategory;
+// import com.example.demo.repository.TicketCategoryRepository;
+// import com.example.demo.service.TicketCategoryService;
+
+// public class TicketCategoryServiceImpl implements TicketCategoryService {
+//     private final TicketCategoryRepository categoryRepository;
+
+//     public TicketCategoryServiceImpl(TicketCategoryRepository categoryRepository) {
+//         this.categoryRepository = categoryRepository;
+//     }
+
+//     @Override
+//     public TicketCategory createCategory(TicketCategory category) {
+//         if (categoryRepository.existsByCategoryName(category.getCategoryName())) {
+//             throw new RuntimeException("Category already exists");
+//         }
+//         return categoryRepository.save(category);
+//     }
+
+//     @Override
+//     public TicketCategory getCategory(Long id) {
+//         return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
+//     }
+// }
+
+
+
+// // package com.example.demo.service.impl;
+
+// // import com.example.demo.model.TicketCategory;
+// // import com.example.demo.service.TicketCategoryService;
+// // import org.springframework.stereotype.Service;
+
+// // @Service
+// // public class TicketCategoryServiceImpl implements TicketCategoryService {
+
+// //     @Override
+// //     public TicketCategory createCategory(TicketCategory category) {
+// //         return category;
+// //     }
+
+// //     @Override
+// //     public TicketCategory getCategory(Long id) {
+// //         return null;
+// //     }
+// // }
+
+
+
+
+
+// // // package com.example.demo.service.impl;
+
+// // // import com.example.demo.model.TicketCategory;
+// // // import com.example.demo.repository.TicketCategoryRepository;
+// // // import com.example.demo.service.TicketCategoryService;
+// // // import org.springframework.stereotype.Service;
+
+// // // @Service
+// // // public class TicketCategoryServiceImpl implements TicketCategoryService {
+
+// // //     private final TicketCategoryRepository categoryRepository;
+
+// // //     public TicketCategoryServiceImpl(TicketCategoryRepository categoryRepository) {
+// // //         this.categoryRepository = categoryRepository;
+// // //     }
+
+// // //     @Override
+// // //     public TicketCategory createCategory(TicketCategory category) {
+// // //         return categoryRepository.save(category);
+// // //     }
+
+// // //     @Override
+// // //     public TicketCategory getCategory(Long id) {
+// // //         return categoryRepository.findById(id).orElse(null);
+// // //     }
+// // // }
+
+
+
+
+
 package com.example.demo.service.impl;
 
 import com.example.demo.model.TicketCategory;
 import com.example.demo.repository.TicketCategoryRepository;
 import com.example.demo.service.TicketCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TicketCategoryServiceImpl implements TicketCategoryService {
-    private final TicketCategoryRepository categoryRepository;
-
+    
+    @Autowired
+    private TicketCategoryRepository categoryRepository;
+    
+    public TicketCategoryServiceImpl() {}
+    
     public TicketCategoryServiceImpl(TicketCategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
@@ -24,56 +115,3 @@ public class TicketCategoryServiceImpl implements TicketCategoryService {
         return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
     }
 }
-
-
-
-// package com.example.demo.service.impl;
-
-// import com.example.demo.model.TicketCategory;
-// import com.example.demo.service.TicketCategoryService;
-// import org.springframework.stereotype.Service;
-
-// @Service
-// public class TicketCategoryServiceImpl implements TicketCategoryService {
-
-//     @Override
-//     public TicketCategory createCategory(TicketCategory category) {
-//         return category;
-//     }
-
-//     @Override
-//     public TicketCategory getCategory(Long id) {
-//         return null;
-//     }
-// }
-
-
-
-
-
-// // package com.example.demo.service.impl;
-
-// // import com.example.demo.model.TicketCategory;
-// // import com.example.demo.repository.TicketCategoryRepository;
-// // import com.example.demo.service.TicketCategoryService;
-// // import org.springframework.stereotype.Service;
-
-// // @Service
-// // public class TicketCategoryServiceImpl implements TicketCategoryService {
-
-// //     private final TicketCategoryRepository categoryRepository;
-
-// //     public TicketCategoryServiceImpl(TicketCategoryRepository categoryRepository) {
-// //         this.categoryRepository = categoryRepository;
-// //     }
-
-// //     @Override
-// //     public TicketCategory createCategory(TicketCategory category) {
-// //         return categoryRepository.save(category);
-// //     }
-
-// //     @Override
-// //     public TicketCategory getCategory(Long id) {
-// //         return categoryRepository.findById(id).orElse(null);
-// //     }
-// // }
